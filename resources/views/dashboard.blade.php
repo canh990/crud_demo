@@ -23,9 +23,8 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Laravel Training</a>
         <div class="navbar-nav">
-            <a class="nav-link" href="{{ route('login') }}">Login</a>
-            <a class="nav-link" href="{{ route('user.createUser') }}">Create user</a>
-            <a class="nav-link" href="{{ route('signout') }}">Sign Out</a>
+            <a class="nav-link" href="{{ route('user.list') }}">Danh sach user</a>
+            <a class="nav-link" href="{{ route('signout') }}">Quay ve list</a>
         </div>
     </div>
 </nav>
