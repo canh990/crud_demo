@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách user</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .wrapper {
+            width: 800px;
+            max-width: 100%;
+        }
+
+        .header, .footer {
+            border: 1px solid black;
+            text-align: center;
+            padding: 10px;
+            font-size: 15px;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .footer {
+            margin-top: 30px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 85%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 6px 10px;
+            font-size: 14px;
+        }
+
+        th {
+            text-align: center;
+        }
+
+        td:nth-child(1) {
+            text-align: center;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .pagination a {
+            color: #337ab7;
+            padding: 6px 12px;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            margin-left: -1px;
+        }
+
+        .pagination a:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+
+    <div class="header">
+        <a href="{{ route('user.list') }}">Home</a>
+        @if (Route::has('signout'))
+            | <b><a href="{{ route('signout') }}">Dang xuat</a></b>
+        @endif
+    </div>
+
+    <h2>Danh sách user</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse($users as $index => $user)
+                <tr>
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>
+                        @if (Route::has('user.readUser'))
+                            <a href="{{ route('user.readUser', $user->id) }}">View</a>
+                        @else
+                            <span>View</span>
+                        @endif
+                        |
+                        @if (Route::has('user.updateUser'))
+                            <a href="{{ route('user.updateUser', $user->id) }}">Edit</a>
+                        @else
+                            <span>Edit</span>
+                        @endif
+                        |
+                        @if (Route::has('user.deleteUser'))
+                            <a href="{{ route('user.deleteUser', $user->id) }}"
+                               onclick="return confirm('Ban co chac muon xoa?')">
+                                Delete
+                            </a>
+                        @else
+                            <span>Delete</span>
+                        @endif
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="4" style="text-align: center;">Khong co user nao.</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+
+    {{-- Nếu có phân trang thì bật dòng này --}}
+    {{-- <div class="pagination">
+        {{ $users->links() }}
+    </div> --}}
+
+    <div class="footer">
+        Lập trình web @01/2024
+    </div>
+
+</div>
+
+</body>
+</html>
