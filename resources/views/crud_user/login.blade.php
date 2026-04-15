@@ -111,7 +111,7 @@
     <div class="browser-mockup">
 
         <div style="font-size: 11px; color: #999; margin-bottom: 3px;">Lập trình web</div>
-        <div class="address-bar">[ http://php.local ]</div>
+        
 
         <div class="nav-header">
             Home | <strong>Đăng nhập</strong> | Đăng ký
