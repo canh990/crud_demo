@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Màn hình đăng nhập</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header */
+        .header {
+            border: 1px solid #333;
+            padding: 10px;
+            margin: 10px;
+            text-align: center;
+            background: #fff;
+        }
+
+        .header a {
+            text-decoration: none;
+            color: #000;
+            margin: 0 5px;
+        }
+
+        /* Main container */
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            border: 1px solid #333;
+            background: #fff;
+            padding: 20px;
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .actions a {
+            text-decoration: none;
+            color: #1a73e8;
+            font-size: 14px;
+        }
+
+        button {
+            background: #1a73e8;
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1558b0;
+        }
+
+        /* Footer */
+        .footer {
+            border: 1px solid #333;
+            padding: 10px;
+            margin: 10px;
+            text-align: center;
+            background: #fff;
+        }
+    </style>
+    <script src="./js/login.js"></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <a href="#">Home</a> |
+        <a href="./index.html"><b>Đăng nhập</b></a> |
+        <a href="./register.html">Đăng ký</a>
+    </div>
+
+    <!-- Login box -->
+    <div class="container">
+        <h2>Màn hình đăng nhập</h2>
+
+        <form>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="username" placeholder="Nhập username">
+            </div>
+
+            <div class="form-group">
+                <label>Mật khẩu</label>
+                <input type="password" id="password" placeholder="Nhập mật khẩu">
+            </div>
+
+            <div class="form-group remember">
+                <input type="checkbox" id="remember">
+                <label>Ghi nhớ đăng nhập</label>
+            </div>
+
+            <div class="actions">
+                <a href="#">Quên mật khẩu</a>
+                <button type="submit">Đăng nhập</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

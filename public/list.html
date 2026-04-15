@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách user</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Thanh điều hướng */
+        .navbar {
+            width: 100%;
+            max-width: 800px;
+            border: 1px solid #000;
+            padding: 10px 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: black;
+            margin: 0 10px;
+            font-size: 14px;
+        }
+
+        h2 {
+            font-weight: normal;
+            margin-bottom: 20px;
+        }
+
+        /* Bảng danh sách */
+        table {
+            width: 80%;
+            max-width: 800px;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            border: 1px solid #000;
+            padding: 8px 12px;
+            font-size: 14px;
+        }
+
+        th {
+            text-align: center;
+        }
+
+        /* Căn giữa cột ID và cột Thao tác */
+        td:first-child, td:last-child {
+            text-align: center;
+        }
+
+        .action-links a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .action-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Phân trang (Pagination) */
+        .pagination {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin-top: 30px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .pagination li {
+            border-right: 1px solid #ddd;
+        }
+
+        .pagination li:last-child {
+            border-right: none;
+        }
+
+        .pagination a {
+            display: block;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #007bff;
+            font-size: 14px;
+        }
+
+        .pagination a:hover {
+            background-color: #f8f9fa;
+        }
+
+        .pagination .active a {
+            color: #6c757d;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="./list.html">Home</a> | <a href="./index.html"><b>Đăng xuất</b></a>
+    </div>
+
+    <h2>Danh sách user</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50px;">#</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody id="userTableBody"></tbody>
+    </table>
+
+    <script>
+        const STORAGE_KEY = 'crud_demo_users';
+        const defaultUsers = [
+            { id: 1, username: 'UPVH', email: 'ATJW@gmail.com', password: '123456' },
+            { id: 2, username: 'IFUK', email: 'KULB@gmail.com', password: '123456' },
+            { id: 3, username: 'DZZQ', email: 'ERNB@gmail.com', password: '123456' },
+            { id: 4, username: 'NJYY', email: 'ROIF@gmail.com', password: '123456' },
+            { id: 5, username: 'YUMG', email: 'KITN@gmail.com', password: '123456' },
+            { id: 6, username: 'WZSU', email: 'CVTL@gmail.com', password: '123456' },
+            { id: 7, username: 'WXFQ', email: 'MIUZ@gmail.com', password: '123456' },
+            { id: 8, username: 'XZOR', email: 'YZLV@gmail.com', password: '123456' },
+            { id: 9, username: 'HGGO', email: 'OYYX@gmail.com', password: '123456' },
+            { id: 10, username: 'PXZX', email: 'YSML@gmail.com', password: '123456' }
+        ];
+
+        function loadUsers() {
+            const data = localStorage.getItem(STORAGE_KEY);
+            return data ? JSON.parse(data) : defaultUsers.slice();
+        }
+
+        function saveUsers(users) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
+        }
+
+        function renderUserTable() {
+            const users = loadUsers();
+            const tbody = document.getElementById('userTableBody');
+            tbody.innerHTML = users.map(user => `
+                <tr>
+                    <td>${user.id}</td>
+                    <td>${user.username}</td>
+                    <td>${user.email}</td>
+                    <td class="action-links">
+                        <a href="./update.html?id=${user.id}">Edit</a> | <a href="./view.html">View</a> | <a href="#" onclick="deleteUser(${user.id})">Delete</a>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function deleteUser(id) {
+            if (confirm('Bạn có chắc muốn xóa user ' + id + '?')) {
+                const users = loadUsers().filter(user => user.id !== id);
+                saveUsers(users);
+                renderUserTable();
+                alert('Đã xóa user ' + id);
+            }
+        }
+
+        renderUserTable();
+    </script>
+
+    <ul class="pagination">
+        <li><a href="#">Previous</a></li>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">Next</a></li>
+    </ul>
+
+
+</body>
+</html>
