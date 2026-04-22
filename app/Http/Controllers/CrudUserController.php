@@ -15,6 +15,23 @@ class CrudUserController extends Controller
     {
         return view('dashboard');
     }
+     public function login()
+    {
+        return view('crud_user.login');
+    }
+
+    public function authUser(Request $request)
+    {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            return redirect()->intended('list')->withSuccess('Signed in');
+        }
+        return redirect()->back()->withErrors(['email' => 'Login details are not valid']);
+    }
 
     public function createUser()
     {
@@ -24,6 +41,17 @@ class CrudUserController extends Controller
     {
         return view('crud_user.register');
     }
+       /**
+     * List of users
+     */
+   public function listUser()
+{
+    $users = User::all();
+    return view('crud_user.list', compact('users'));
+}
+    /**
+     * Sign out
+     */
 
     public function register(Request $request)
     {
