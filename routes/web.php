@@ -25,3 +25,11 @@ Route::get('/logout', [CrudUserController::class, 'ssignout'])->name('signout');
 
 Route::get('dashboard', [CrudUserController::class, 'dashboard'])->name('dashboard');
 Route::get('/user/create', [CrudUserController::class, 'createUser'])->name('user.createUser');
+// CRUD User
+Route::prefix('users')->name('user.')->group(function () {
+    Route::get('/', [CrudUserController::class, 'listUser'])->name('list');
+    Route::get('/{user}', [CrudUserController::class, 'readUser'])->name('readUser');
+    Route::get('/{user}/edit', [CrudUserController::class, 'editUser'])->name('updateUser');
+    Route::put('/{user}', [CrudUserController::class, 'saveUser'])->name('saveUser');
+    Route::delete('/{user}', [CrudUserController::class, 'deleteUser'])->name('deleteUser');
+});
