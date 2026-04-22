@@ -114,7 +114,7 @@
         <div class="address-bar">[ http://php.local ]</div>
 
         <div class="nav-header">
-            Home | <strong>Đăng nhập</strong> | Đăng ký
+            Home | <strong>Đăng nhập</strong> | <a href="{{ route('register') }}">Đăng ký</a>
         </div>
 
         <div class="main-box">
